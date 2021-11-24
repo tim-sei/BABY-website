@@ -47,15 +47,12 @@ X = dict(model=model_type, prompt=prompt, secret=secrets)
 
 def call_api():
     response = requests.get(url, params=X)
-    return response.json()
+    return response.json()["response"].replace("\n===", "")
 
 
 if st.button('Answer my joke'):
-    st.text(call_api())
+    st.markdown(f'## {call_api()}')
 
 ## Finally, we can display the prediction to the user
-st.markdown("""
-## My guess is:
-""")
 #st.text(response.json())
 #st.text("Nononono, Nononono")
