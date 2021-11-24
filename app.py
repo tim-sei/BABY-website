@@ -1,3 +1,4 @@
+from SimpleTaxiFare.trainer import MODEL_NAME
 import streamlit as st
 import requests
 import pandas as pd
@@ -29,25 +30,32 @@ st.markdown("""#  -- - BABY - --
 ##
 """)
 
-art_type = st.radio('Today BABY will write you...',
-                    ('a poem', 'a haiku', 'a rapsong', 'nothing'))
+model_type = st.radio('Which model do you want to try?',
+                    ('ada', 'curie', 'babbage', 'davinci'))
 
-topic = st.text_input('I want to talk about...', 'influence')
+prompt = st.text_input('I want to know: Can beta.BABY give the right answer to my joke...', 'Type in my joke...')
 
-url = 'https://taxifare.lewagon.ai/predict'
-X = dict(param1=art_type, param2=topic)
+secrets = st.text_input('Password', 'write password here')
+
+url = 'https://morning-citadel-09821.herokuapp.com/predict'
+X = dict(model=model_type, prompt=prompt, secret=secrets)
 
 # 3. Let's call our API using the `requests` package...
-response = requests.get(url, params=X)
-
+#response = requests.get(url, params=X)
 # 4. Let's retrieve the prediction from the **JSON** returned by the API...
-response.json()
+#response.json()
 
-st.button('Write me a poem')
+def call_api():
+    response = requests.get(url, params=X)
+    return response.json()
+
+
+if st.button('Answer my joke'):
+    st.text(call_api())
 
 ## Finally, we can display the prediction to the user
 st.markdown("""
-## Here is you poem:
+## My guess is:
 """)
-#st.text(round(response.json()['prediction'], 2))
-st.text("Nononono, Nononono")
+#st.text(response.json())
+#st.text("Nononono, Nononono")
