@@ -1,4 +1,3 @@
-from SimpleTaxiFare.trainer import MODEL_NAME
 import streamlit as st
 import requests
 import pandas as pd
