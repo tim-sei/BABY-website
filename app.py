@@ -36,9 +36,9 @@ hatespeech = st.radio('Activate Hate Speech Detecor', (True, False))
 
 temperature = st.slider('Select a temperature', 1, 10, 1)
 
-prompt = st.text_input('I want to know: Can beta.BABY give the right answer to my joke...', 'Type in my joke...')
+prompt = st.text_input('Write a poem about...', '')
 
-secrets = st.text_input('Password', 'write password here')
+secrets = st.text_input('Password', '')
 
 url = 'https://morning-citadel-09821.herokuapp.com/predict'
 
@@ -54,7 +54,7 @@ def call_api():
     return response.json()["response"].replace("\n===", "")
 
 
-if st.button('Answer my joke'):
+if st.button('Write me AI poesy.'):
     st.markdown(f'## {call_api()}')
 
 ## Finally, we can display the prediction to the user
