@@ -39,7 +39,7 @@ prompt = st.text_input('I want to know: Can beta.BABY give the right answer to m
 secrets = st.text_input('Password', 'write password here')
 
 url = 'https://morning-citadel-09821.herokuapp.com/predict'
-X = dict(model=model_type, prompt=prompt, secret=secrets)
+X = dict(model=model_type, prompt=prompt, secret=secrets, HateSpeechDetector=hatespeech)
 
 # 3. Let's call our API using the `requests` package...
 #response = requests.get(url, params=X)
@@ -48,6 +48,7 @@ X = dict(model=model_type, prompt=prompt, secret=secrets)
 
 def call_api():
     response = requests.get(url, params=X)
+    # return response.json()["response"]
     return response.json()["response"].replace("\n===", "")
 
 
