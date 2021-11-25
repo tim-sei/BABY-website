@@ -61,7 +61,8 @@ def call_api():
 if st.button('Write me AI poesy.'):
     poems = call_api()
     for poem in poems:
-        st.markdown(f'## {poem.replace("\n===", "")}')
+        poem = poem.replace("\n===", "")
+        st.markdown(f'## {poem}')
 
 ## Finally, we can display the prediction to the user
 #st.text(response.json())
