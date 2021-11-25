@@ -36,13 +36,15 @@ hatespeech = st.radio('Activate Hate Speech Detecor', (True, False))
 
 temperature = st.slider('Select a temperature', 1, 10, 1)
 
+n = st.slider('Select number of generations', 1, 3, 1)
+
 prompt = st.text_input('Write a poem about...', '')
 
 secrets = st.text_input('Password', '')
 
 url = 'https://morning-citadel-09821.herokuapp.com/predict'
 
-X = dict(model=model_type, prompt=prompt, secret=secrets, temperature=temperature/10, HateSpeechDetector=hatespeech)
+X = dict(model=model_type, prompt=prompt, secret=secrets, temperature=temperature/10, n=n, HateSpeechDetector=hatespeech)
 
 # 3. Let's call our API using the `requests` package...
 #response = requests.get(url, params=X)
@@ -51,11 +53,13 @@ X = dict(model=model_type, prompt=prompt, secret=secrets, temperature=temperatur
 
 def call_api():
     response = requests.get(url, params=X)
-    return response.json()["response"].replace("\n===", "")
+    return response.json()["response"]
 
 
 if st.button('Write me AI poesy.'):
-    st.markdown(f'## {call_api()}')
+    poems = call_api()
+    for poem in poems:
+        st.markdown(f'## {poem.replace("\n===", "")}')
 
 ## Finally, we can display the prediction to the user
 #st.text(response.json())
