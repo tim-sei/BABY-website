@@ -36,13 +36,27 @@ hatespeech = st.radio('Activate Hate Speech Detecor', (True, False))
 
 temperature = st.slider('Select a temperature', 1, 10, 1)
 
+frequency_penalty = st.slider('Select frequency_penalty', 1, 20, 1)
+
+presence_penalty = st.slider('Select presence_penalty', 1, 20, 1)
+
+max_tokens = st.slider('Select max tokens', 25, 75, 1)
+
 prompt = st.text_input('Write a poem about...', '')
 
 secrets = st.text_input('Password', '')
 
 url = 'https://morning-citadel-09821.herokuapp.com/predict'
 
-X = dict(model=model_type, prompt=prompt, secret=secrets, temperature=temperature/10, HateSpeechDetector=hatespeech)
+X = dict(model=model_type,
+         prompt=prompt,
+         secret=secrets,
+         temperature=temperature/10,
+         HateSpeechDetector=hatespeech,
+         frequency_penalty=frequency_penalty/10,
+         presence_penalty=presence_penalty/10,
+         max_tokens=max_tokens
+         )
 
 # 3. Let's call our API using the `requests` package...
 #response = requests.get(url, params=X)
