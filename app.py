@@ -1,4 +1,3 @@
-from SimpleTaxiFare.trainer import MODEL_NAME
 import streamlit as st
 import requests
 import pandas as pd
@@ -33,6 +32,8 @@ st.markdown("""#  -- - BABY - --
 model_type = st.radio('Which model do you want to try?',
                     ('ada', 'curie', 'babbage', 'davinci'))
 
+hatespeech = st.radio('Activate Hate Speech Detecor', (True, False))
+
 temperature = st.slider('Select a temperature', 1, 10, 1)
 
 prompt = st.text_input('I want to know: Can beta.BABY give the right answer to my joke...', 'Type in my joke...')
@@ -40,7 +41,8 @@ prompt = st.text_input('I want to know: Can beta.BABY give the right answer to m
 secrets = st.text_input('Password', 'write password here')
 
 url = 'https://morning-citadel-09821.herokuapp.com/predict'
-X = dict(model=model_type, prompt=prompt, secret=secrets, temperature=temperature/10)
+
+X = dict(model=model_type, prompt=prompt, secret=secrets, temperature=temperature/10, HateSpeechDetector=hatespeech)
 
 # 3. Let's call our API using the `requests` package...
 #response = requests.get(url, params=X)
