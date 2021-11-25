@@ -32,6 +32,8 @@ st.markdown("""#  -- - BABY - --
 model_type = st.radio('Which model do you want to try?',
                     ('ada', 'curie', 'babbage', 'davinci'))
 
+hatespeech = st.radio('Activate Hate Speech Detecor', (True, False))
+
 prompt = st.text_input('I want to know: Can beta.BABY give the right answer to my joke...', 'Type in my joke...')
 
 secrets = st.text_input('Password', 'write password here')
