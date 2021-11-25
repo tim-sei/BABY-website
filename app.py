@@ -34,12 +34,15 @@ model_type = st.radio('Which model do you want to try?',
 
 hatespeech = st.radio('Activate Hate Speech Detecor', (True, False))
 
+temperature = st.slider('Select a temperature', 1, 10, 1)
+
 prompt = st.text_input('I want to know: Can beta.BABY give the right answer to my joke...', 'Type in my joke...')
 
 secrets = st.text_input('Password', 'write password here')
 
 url = 'https://morning-citadel-09821.herokuapp.com/predict'
-X = dict(model=model_type, prompt=prompt, secret=secrets, HateSpeechDetector=hatespeech)
+
+X = dict(model=model_type, prompt=prompt, secret=secrets, temperature=temperature/10, HateSpeechDetector=hatespeech)
 
 # 3. Let's call our API using the `requests` package...
 #response = requests.get(url, params=X)
@@ -48,7 +51,6 @@ X = dict(model=model_type, prompt=prompt, secret=secrets, HateSpeechDetector=hat
 
 def call_api():
     response = requests.get(url, params=X)
-    # return response.json()["response"]
     return response.json()["response"].replace("\n===", "")
 
 
