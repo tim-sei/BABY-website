@@ -58,7 +58,7 @@ X = dict(model=model_type, prompt=prompt, secret=secrets, temperature=temperatur
 
 def call_api():
     response = requests.get(url, params=X)
-    return response.json()["response"]
+    return response.json()["response"]['answers']
 
 
 if st.button('Write me AI poesy.'):
