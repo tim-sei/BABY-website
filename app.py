@@ -5,19 +5,22 @@ import numpy as np
 
 CSS = """
 h1 {
-    color: red;
+    color: #B8860B;
 }
-h2 {
-    color: green;
+h3 {
+    color: #2F4F4F;
 }
 
 .stApp {
-    background-image: url(https://cdn.mos.cms.futurecdn.net/ZsQmSHKYueHSDgJ4r3KHhk-970-80.gif);
     background-size: cover;
-    background-color: black;
+    background-color: #F0F8FF;
 
 }
 """
+
+#old     background-image: url(https://cdn.mos.cms.futurecdn.net/ZsQmSHKYueHSDgJ4r3KHhk-970-80.gif);
+#old2    background-image: url(https://upload.wikimedia.org/wikipedia/en/c/ce/DancingBaby.jpg);
+
 if st.checkbox('Inject CSS'):
     st.write(f'<style>{CSS}</style>', unsafe_allow_html=True)
 
@@ -32,9 +35,6 @@ st.markdown("""#  -- - BABY - --
 model_type = st.radio('Which model do you want to try?',
                     ('ada', 'curie', 'babbage', 'davinci'))
 
-answer_type = st.radio('Which type of answer?',
-                    ('haiku', 'rap', 'classical', 'bobdylan'))
-
 hatespeech = st.radio('Activate Hate Speech Detecor', (True, False))
 
 temperature = st.slider('Select a temperature', 1, 10, 1)
@@ -43,13 +43,44 @@ n = st.slider('Select number of generations', 1, 3, 1)
 
 max_tokens = st.slider('Select max tokens', 25, 75, 1)
 
-prompt = st.text_input('Write a poem about...', '')
-
 secrets = st.text_input('Password', '')
+
+'''
+### BABY, please write me a beautiful piece of art about...
+'''
+prompt = st.text_input('', '...this topic...')
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.subheader("...in the lyrical form of a...")
+    answer_type = st.radio('',
+                       ('haiku',
+                        'rap song',
+                        'classical poem',
+                        'bob dylan song'))
+with col2:
+    st.subheader("...written by...")
+    personality_type = st.radio('', (
+        'greta thunberg',
+        'elon musk',
+        'michelle obama',
+        'justin bieber',
+    ))
+
+
 
 url = 'https://morning-citadel-09821.herokuapp.com/predict'
 
-X = dict(model=model_type, prompt=prompt, secret=secrets, temperature=temperature/10, n=n, max_tokens=max_tokens, _type=answer_type, HateSpeechDetector=hatespeech)
+X = dict(model=model_type,
+         prompt=prompt,
+         personality_type=personality_type,
+         secret=secrets,
+         temperature=temperature / 10,
+         n=n,
+         max_tokens=max_tokens,
+         _type=answer_type,
+         HateSpeechDetector=hatespeech)
 
 # 3. Let's call our API using the `requests` package...
 #response = requests.get(url, params=X)
@@ -61,12 +92,16 @@ def call_api():
     return response.json()["response"]['answers']
 
 
-if st.button('Write me AI poesy.'):
+if st.button('Feed BABY.'):
     poems = call_api()
     for poem in poems:
         poem = poem.replace("\n===", "")
-        st.markdown(f'## {poem}')
+        st.markdown(f'## This is a {answer_type}, written by the fake personality of {personality_type} about {prompt}: {poem}')
 
-## Finally, we can display the prediction to the user
-#st.text(response.json())
-#st.text("Nononono, Nononono")
+
+'''### ____BABY____ is:
+
+Users’ generative AI poetry InterFace
+/ a computational system, where mathematics meets language and logic meets power
+/ by Rhea Dally, Guilliaume De Sa, Marco Zausch, Tim Seifert
+'''
