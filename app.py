@@ -46,9 +46,9 @@ n = st.slider('Select number of generations', 1, 3, 1)
 secrets = st.text_input('Password', '')
 
 '''
-### BABY, please write me a beautiful piece of art about...
+### BABY, please write me a beautiful piece of art about... (Separate topics by a comma (3 topics max))
 '''
-prompt = st.text_input('', '...this topic...')
+prompt = st.text_input('', 'flowers, philosophy')
 
 col1, col2 = st.columns(2)
 
