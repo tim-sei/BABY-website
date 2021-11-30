@@ -41,7 +41,7 @@ model_type = st.radio(
 
 # temperature = st.slider('Select a temperature', 1, 10, 1)
 
-n = st.slider('Select number of generations', 1, 3, 1)
+# n = st.slider('Select number of generations', 1, 3, 1)
 
 # max_tokens = st.slider('Select max tokens', 25, 75, 1)
 
@@ -65,6 +65,7 @@ with col1:
 with col2:
     st.subheader("...written by...")
     personality_type = st.radio('', (
+        'myself',
         'greta thunberg',
         'elon musk',
         'michelle obama',
@@ -72,7 +73,8 @@ with col2:
         'an artificial intelligence'
     ))
 
-url = 'https://morning-citadel-09821.herokuapp.com/predict'
+# url = 'https://morning-citadel-09821.herokuapp.com/predict'
+url = 'http://127.0.0.1:8000/predict'
 
 X = dict(model=model_type,
          prompt=prompt,
@@ -94,10 +96,10 @@ if st.button('Feed BABY.'):
     poem = call_api()
     # for poem in poems:
     # poem = poem.replace("\n===", "")
-    st.markdown(f'## This is a {answer_type}, written by the fake personality of {personality_type} about {prompt}:')
-    st.markdown(f'## {poem}')
+    st.markdown(f'#### The following is a {answer_type} about {prompt} by {personality_type}:')
+    st.markdown(f'{poem}')
 
-'''### ____BABY____ is:
+'''#### ____BABY____ is:
 
 Users’ generative AI poetry InterFace
 / a computational system, where mathematics meets language and logic meets power
