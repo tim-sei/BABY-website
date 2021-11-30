@@ -32,8 +32,10 @@ st.markdown("""#  -- - BABY - --
 ##
 """)
 
-model_type = st.radio('Which model do you want to try?',
-                    ('ada', 'curie', 'babbage', 'davinci'))
+model_type = st.radio(
+    'Which model do you want to try?',
+    ('ada', 'curie', 'babbage', 'davinci',
+     'curie:ft-user-6qfzuqjhvk29sbtb6ezmcw63-2021-11-27-16-36-49'))
 
 # hatespeech = st.radio('Activate Hate Speech Detecor', (True, False))
 
@@ -85,7 +87,7 @@ X = dict(model=model_type,
 
 def call_api():
     response = requests.get(url, params=X)
-    return response.json()["response"][0]['text']
+    return response.json()["response"]
 
 
 if st.button('Feed BABY.'):
