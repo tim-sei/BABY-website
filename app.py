@@ -66,6 +66,7 @@ with col2:
         'elon musk',
         'michelle obama',
         'justin bieber',
+        'an artificial intelligence'
     ))
 
 
@@ -95,9 +96,9 @@ def call_api():
 if st.button('Feed BABY.'):
     poems = call_api()
     for poem in poems:
-        poem = poem.replace("\n===", "")
-        st.markdown(f'## This is a {answer_type}, written by the fake personality of {personality_type} about {prompt}: {poem}')
-
+        # poem = poem.replace("\n===", "")
+        st.markdown(f'## This is a {answer_type}, written by the fake personality of {personality_type} about {prompt}')
+        st.markdown(f'{str(poem)}')
 
 '''### ____BABY____ is:
 
