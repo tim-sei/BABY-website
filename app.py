@@ -90,7 +90,7 @@ X = dict(model=model_type,
 
 def call_api():
     response = requests.get(url, params=X)
-    return response.json()["response"]
+    return response.json()["response"]['text']
 
 
 if st.button('Feed BABY.'):
