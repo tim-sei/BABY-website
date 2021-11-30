@@ -35,7 +35,7 @@ st.markdown("""#  -- - BABY - --
 model_type = st.radio(
     'Which model do you want to try?',
     ('ada', 'curie', 'babbage', 'davinci',
-     'ft-Bo8TJyUWYv4heiCZuBtydf3B'))
+     'curie:ft-user-6qfzuqjhvk29sbtb6ezmcw63-2021-11-27-16-36-49'))
 
 # hatespeech = st.radio('Activate Hate Speech Detecor', (True, False))
 
