@@ -3,6 +3,7 @@ import requests
 import pandas as pd
 import numpy as np
 
+
 CSS = """
 h1 {
     color: #B8860B;
@@ -105,3 +106,13 @@ Users’ generative AI poetry InterFace
 / a computational system, where mathematics meets language and logic meets power
 / by Rhea Dally, Guilliaume De Sa, Marco Zausch, Tim Seifert
 '''
+BUCKET_NAME = 'wagon-data-735-babyproject'
+BUCKET_OUTPUT_DATA_PATH = 'output_data/output.json'
+df = pd.read_json(f"gs://{BUCKET_NAME}/{BUCKET_OUTPUT_DATA_PATH}")
+history = ''
+for index, row in df.iterrows():
+    history = history + (
+        f"User Prompt: {row['user_prompt']} \n Answer: {row['answer']} \n \n \n")
+
+expander = st.expander("View BABYs historical output here")
+expander.text(history)
