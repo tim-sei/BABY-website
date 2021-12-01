@@ -74,8 +74,8 @@ with col2:
         'an artificial intelligence'
     ))
 
-# url = 'https://morning-citadel-09821.herokuapp.com/predict'
-url = 'http://127.0.0.1:8000/predict'
+url = 'https://morning-citadel-09821.herokuapp.com/predict'
+# url = 'http://127.0.0.1:8000/predict'
 
 X = dict(model=model_type,
          prompt=prompt,
