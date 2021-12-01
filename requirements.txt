@@ -1,2 +1,6 @@
 streamlit
 fsspec
+gcsfs
+pandas
+numpy
+requests
