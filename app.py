@@ -35,8 +35,8 @@ st.markdown("""#  -- - BABY - --
 
 model_type = st.radio(
     'Which model do you want to try?',
-    ('ada', 'curie', 'babbage', 'davinci',
-     'curie:ft-user-6qfzuqjhvk29sbtb6ezmcw63-2021-11-27-16-36-49'))
+    ('Ada', 'Curie', 'Babbage', 'Davinci',
+     'Curie Haiku', 'Curie Rap', 'Curie Poems'))
 
 # hatespeech = st.radio('Activate Hate Speech Detecor', (True, False))
 
@@ -74,8 +74,8 @@ with col2:
         'an artificial intelligence'
     ))
 
-url = 'https://morning-citadel-09821.herokuapp.com/predict'
-# url = 'http://127.0.0.1:8000/predict'
+# url = 'https://morning-citadel-09821.herokuapp.com/predict'
+url = 'http://127.0.0.1:8000/predict'
 
 X = dict(model=model_type,
          prompt=prompt,
@@ -90,14 +90,19 @@ X = dict(model=model_type,
 
 def call_api():
     response = requests.get(url, params=X)
-    return response.json()["response"]
+    return response.json()
 
 
 if st.button('Feed BABY.'):
-    poem = call_api()
+    res = call_api()
+    poem = res["response"]
+    prompt = '...'
+    if 'prompt' in res:
+        prompt = res['prompt']
+
     # for poem in poems:
     # poem = poem.replace("\n===", "")
-    st.markdown(f'#### The following is a {answer_type} about {prompt} by {personality_type}:')
+    st.markdown(f'#### {prompt}:')
     st.markdown(f'{poem}')
 
 '''#### ____BABY____ is:
